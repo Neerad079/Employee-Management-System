@@ -24,6 +24,7 @@ public class employeeDB {
     private Integer employeeCode;
 
     @com.fasterxml.jackson.annotation.JsonAlias({"firstname", "Firstname"})
+    @Column(name = "first_name")
     private String firstName;
     private String lastName;
     private String email;

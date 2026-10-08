@@ -1,9 +1,9 @@
 package employee.managment.services;
 
+import employee.managment.exceptions.employeeNotFoundException;
 import employee.managment.model.employeeDB;
 import employee.managment.repository.employeeRepo;
 import lombok.AllArgsConstructor;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,9 +18,11 @@ public class employeeService {
     public List<employeeDB> getAllEmployee(){
         return repo.findAll();
     }
-    public employeeDB getEmployeeById(Long Id){
-        return repo.findById(Id)
-                .orElseThrow(()->new RuntimeException("Employee not found with id: "+Id));
+    public employeeDB getEmployeeById(Long id){
+        return repo.findById(id)
+                .orElseThrow(()->new employeeNotFoundException(
+                        "Employee with id "+id+" not found"
+                ));
         
     }
     public List<employeeDB> searchEmployee(String keyword){
@@ -42,21 +44,21 @@ public class employeeService {
         System.out.println(employee);   // @Data generates toString()
         return repo.save(employee);
     }
-//    public employeeDB updateEmployee(Long id,employeeDB emp){
-//        employeeDB employee = repo.findById(id)
-//                .orElseThrow(()->new RuntimeException("Employee not found with id: "+id));
-//        employee.setEmployeeCode(emp.getEmployeeCode());
-//        employee.setFirstname(emp.getfirstname());
-//        employee.setLastName(emp.getLastName());
-//        employee.setEmail(emp.getEmail());
-//        employee.setPhoneNo(emp.getPhoneNo());
-//        employee.setDepartment(emp.getDepartment());
-//        employee.setDesignation(emp.getDesignation());
-//        employee.setSalary(emp.getSalary());
-//        employee.setJoiningDate(emp.getJoiningDate());
-//        employee.setStatus_(emp.getStatus_());
-//        return repo.save(employee);
-//    }
+    public employeeDB updateEmployee(Long id,employeeDB emp){
+        employeeDB employee = repo.findById(id)
+                .orElseThrow(()->new RuntimeException("Employee not found with id: "+id));
+        employee.setEmployeeCode(emp.getEmployeeCode());
+        employee.setFirstName(emp.getFirstName());
+        employee.setLastName(emp.getLastName());
+        employee.setEmail(emp.getEmail());
+        employee.setPhoneNo(emp.getPhoneNo());
+        employee.setDepartment(emp.getDepartment());
+        employee.setDesignation(emp.getDesignation());
+        employee.setSalary(emp.getSalary());
+        employee.setJoiningDate(emp.getJoiningDate());
+        employee.setStatus(emp.getStatus());
+        return repo.save(employee);
+    }
     public void deleteEmployee(Long id){
         repo.deleteById(id);
     }

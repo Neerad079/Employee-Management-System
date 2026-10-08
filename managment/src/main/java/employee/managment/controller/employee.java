@@ -33,4 +33,13 @@ public class employee {
     public ResponseEntity<employeeDB> createEmployee(@RequestBody employeeDB employeeDB ){
         return ResponseEntity.ok(service.createEmployee(employeeDB));
     }
+    @PutMapping("/{id}")
+    public ResponseEntity<employeeDB> updateEmployee(@PathVariable Long id,@RequestBody employeeDB employeeDB){
+        return ResponseEntity.ok(service.updateEmployee(id,employeeDB));
+    }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteEmployee(@PathVariable Long id){
+        service.deleteEmployee(id);
+       return ResponseEntity.ok("Employee with id "+id+" deleted successfully");
+    }
 }
