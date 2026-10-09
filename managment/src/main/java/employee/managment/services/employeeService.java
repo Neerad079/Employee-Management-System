@@ -35,10 +35,15 @@ public class employeeService {
     public employeeDB createEmployee(employeeDB emp) {
         employeeDB employee;
         if(repo.existsByEmployeeCode(emp.getEmployeeCode())){
-            throw new DuplicateFieldsException("Employee Code Must be Unique");
+            throw new DuplicateFieldsException(
+                    "employeeCode",
+                    "Employee code already exists");
         }
         if (repo.existsByEmail(emp.getEmail())) {
-            throw new DuplicateFieldsException("Email already exists");
+            throw new DuplicateFieldsException(
+                    "email",
+                    "Email already exists"
+            );
         }
         if(! (emp.getStatus().equals("Active")|| emp.getStatus().equals("Inactive") )){
             throw new EmployeeStatusException("Employee Status Must be either Active or Inactive");

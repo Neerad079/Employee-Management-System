@@ -1,7 +1,15 @@
 package employee.managment.exceptions;
 
-public class DuplicateFieldsException extends RuntimeException{
-    public DuplicateFieldsException(String message){
+import lombok.Getter;
+
+@Getter
+public class DuplicateFieldsException extends RuntimeException {
+
+    private final String field;
+
+    public DuplicateFieldsException(String field, String message) {
         super(message);
+        this.field = field;
     }
+
 }
