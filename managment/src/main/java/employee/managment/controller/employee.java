@@ -3,6 +3,7 @@ package employee.managment.controller;
 
 import employee.managment.model.employeeDB;
 import employee.managment.services.employeeService;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
@@ -30,11 +31,11 @@ public class employee {
         return ResponseEntity.ok(service.searchEmployee(keyword));
     }
     @PostMapping
-    public ResponseEntity<employeeDB> createEmployee(@RequestBody employeeDB employeeDB ){
+    public ResponseEntity<employeeDB> createEmployee(@Valid @RequestBody employeeDB employeeDB ){
         return ResponseEntity.ok(service.createEmployee(employeeDB));
     }
     @PutMapping("/{id}")
-    public ResponseEntity<employeeDB> updateEmployee(@PathVariable Long id,@RequestBody employeeDB employeeDB){
+    public ResponseEntity<employeeDB> updateEmployee(@PathVariable Long id, @Valid @RequestBody employeeDB employeeDB){
         return ResponseEntity.ok(service.updateEmployee(id,employeeDB));
     }
     @DeleteMapping("/{id}")

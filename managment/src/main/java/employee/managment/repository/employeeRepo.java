@@ -17,4 +17,6 @@ public interface employeeRepo extends JpaRepository<employeeDB, Long> {
            "LOWER(e.email) LIKE LOWER(CONCAT('%', :keyword, '%')) OR " +
            "LOWER(e.department) LIKE LOWER(CONCAT('%', :keyword, '%'))")
     List<employeeDB> searchEmployees(@Param("keyword") String keyword);
+    boolean existsByEmployeeCode(Integer employeeCode);
+    boolean existsByEmail(String email);
 }

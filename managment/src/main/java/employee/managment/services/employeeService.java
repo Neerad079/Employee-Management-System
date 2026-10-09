@@ -1,9 +1,13 @@
 package employee.managment.services;
 
+import employee.managment.exceptions.DuplicateFieldsException;
+import employee.managment.exceptions.EmployeeStatusException;
 import employee.managment.exceptions.employeeNotFoundException;
 import employee.managment.model.employeeDB;
 import employee.managment.repository.employeeRepo;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -28,21 +32,33 @@ public class employeeService {
     public List<employeeDB> searchEmployee(String keyword){
         return repo.searchEmployees(keyword);
     }
-    public employeeDB createEmployee(employeeDB emp){
-        employeeDB employee = employeeDB.builder()
-                .employeeCode(emp.getEmployeeCode())
-                .firstName(emp.getFirstName())
-                .lastName(emp.getLastName())
-                .email(emp.getEmail())
-                .phoneNo(emp.getPhoneNo())
-                .department(emp.getDepartment())
-                .designation(emp.getDesignation())
-                .salary(emp.getSalary())
-                .joiningDate(emp.getJoiningDate())
-                .status(emp.getStatus())
-                .build();
-        System.out.println(employee);   // @Data generates toString()
-        return repo.save(employee);
+    public employeeDB createEmployee(employeeDB emp) {
+        employeeDB employee;
+        if(repo.existsByEmployeeCode(emp.getEmployeeCode())){
+            throw new DuplicateFieldsException("Employee Code Must be Unique");
+        }
+        if (repo.existsByEmail(emp.getEmail())) {
+            throw new DuplicateFieldsException("Email already exists");
+        }
+        if(! (emp.getStatus().equals("Active")|| emp.getStatus().equals("Inactive") )){
+            throw new EmployeeStatusException("Employee Status Must be either Active or Inactive");
+        }
+        employee = employeeDB.builder()
+                    .employeeCode(emp.getEmployeeCode())
+                    .firstName(emp.getFirstName())
+                    .lastName(emp.getLastName())
+                    .email(emp.getEmail())
+                    .phoneNo(emp.getPhoneNo())
+                    .department(emp.getDepartment())
+                    .designation(emp.getDesignation())
+                    .salary(emp.getSalary())
+                    .joiningDate(emp.getJoiningDate())
+                    .status(emp.getStatus())
+                    .build();
+
+            System.out.println(employee);   // @Data generates toString()
+            return repo.save(employee);
+
     }
     public employeeDB updateEmployee(Long id,employeeDB emp){
         employeeDB employee = repo.findById(id)
