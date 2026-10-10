@@ -115,4 +115,29 @@ public class EmployeePageController {
         return "redirect:/ui/employees";
     }
 
+    @GetMapping("ui/employees/{id}")
+    public String viewEmployee(
+            @PathVariable Long id,
+            Model model) {
+
+        model.addAttribute(
+                "employee",
+                employeeService.getEmployeeById(id)
+        );
+
+        return "employees/view";
+    }
+    @PostMapping("ui/employees/{id}/delete")
+    public String deleteEmployee(
+             @Valid @PathVariable Long id,
+             RedirectAttributes redirectAttributes){
+        employeeService.deleteEmployee(id);
+        redirectAttributes.addFlashAttribute(
+                "successMessage",
+                "Employee deleted successfully"
+        );
+        return "redirect:/ui/employees";
+    }
+
+
 }

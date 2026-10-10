@@ -32,11 +32,27 @@
     </thead>
     <tbody>
     <tr th:each="emp: ${employees}">
+
         <td>
+            <a th:href="@{/ui/employees/{id}(id=${emp.employeeId})}">
+                View
+            </a>
+
             <a th:href="@{/ui/employees/{id}/edit(id=${emp.employeeId})}">
                 Edit
             </a>
+
+            <form th:action="@{/ui/employees/{id}/delete(id=${emp.employeeId})}"
+                  method="post"
+                  style="display: inline;"
+                  onsubmit="return confirm('Are you sure you want to delete this employee?');">
+
+                <button type="submit">Delete</button>
+
+            </form>
+
         </td>
+
         <td th:text="${emp.employeeCode}"></td>
         <td th:text="${emp.firstName}"></td>
         <td th:text="${emp.lastName}"></td>
