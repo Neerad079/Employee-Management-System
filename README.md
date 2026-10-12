@@ -299,35 +299,38 @@ Once started, the application will be accessible at:
 curl -X POST http://localhost:8080/api/employee \
   -H "Content-Type: application/json" \
   -d '{
-    "employeeCode": 1001,
-    "firstName": "John",
-    "lastName": "Doe",
-    "email": "john.doe@example.com",
-    "phoneNo": "9876543210",
+    "employeeCode": 100,
+    "firstname": "Vikram",
+    "lastName": "Malhotra",
+    "email": "vikram@gmail.com",
+    "phoneNo": "9571556681",
     "department": "Engineering",
-    "designation": "Backend Engineer",
-    "salary": 950000,
-    "joiningDate": "2024-01-15",
-    "status": "Active"
+    "designation": "DevOps Engineer",
+    "salary": 75000,
+    "joiningDate": "2022-04-01T10:00:00.000Z",
+    "status_": "Active"
   }'
 ```
 
 **Success Response (`200 OK`):**
 ```json
 {
-  "employeeId": 1,
-  "employeeCode": 1001,
-  "firstName": "John",
-  "lastName": "Doe",
-  "email": "john.doe@example.com",
-  "phoneNo": "9876543210",
+  "employeeId": 17,
+  "employeeCode": 100,
+  "firstName": "Vikram",
+  "lastName": "Malhotra",
+  "email": "vikram@gmail.com",
+  "phoneNo": "9571556681",
   "department": "Engineering",
-  "designation": "Backend Engineer",
-  "salary": 950000,
-  "joiningDate": "2024-01-15",
+  "designation": "DevOps Engineer",
+  "salary": 75000,
+  "joiningDate": "2022-04-01",
   "status": "Active"
 }
 ```
+
+#### Postman Verification:
+![Postman POST Employee](docs/screenshots/post_employee.svg)
 
 ---
 
@@ -344,48 +347,67 @@ curl -X GET http://localhost:8080/api/employee
 ```json
 [
   {
-    "employeeId": 1,
-    "employeeCode": 1001,
-    "firstName": "John",
-    "lastName": "Doe",
-    "email": "john.doe@example.com",
-    "phoneNo": "9876543210",
+    "employeeId": 15,
+    "employeeCode": 79,
+    "firstName": "Neerad",
+    "lastName": "Ramesh",
+    "email": "neeradsramesh@gmail.com",
+    "phoneNo": "9571994484",
     "department": "Engineering",
     "designation": "Backend Engineer",
-    "salary": 950000,
-    "joiningDate": "2024-01-15",
+    "salary": 100000,
+    "joiningDate": "2005-07-18",
     "status": "Active"
+  },
+  {
+    "employeeId": 16,
+    "employeeCode": 7,
+    "firstName": "Daksh",
+    "lastName": "Sharma",
+    "email": "daksh007@gmail.com",
+    "phoneNo": "9256477840",
+    "department": "Engineering",
+    "designation": "AI/ML",
+    "salary": 500000,
+    "joiningDate": "2007-07-07",
+    "status": "Inactive"
   }
 ]
 ```
+
+#### Postman Verification:
+![Postman GET All Employees](docs/screenshots/get_all_employees.svg)
 
 ---
 
 ### 3. Get Employee by ID (GET)
 
-**Endpoint:** `GET /api/employee/1`
+**Endpoint:** `GET /api/employee/15`
 
 **Sample Request (cURL):**
 ```bash
-curl -X GET http://localhost:8080/api/employee/1
+curl -X GET http://localhost:8080/api/employee/15
 ```
 
 **Success Response (`200 OK`):**
 ```json
 {
-  "employeeId": 1,
-  "employeeCode": 1001,
-  "firstName": "John",
-  "lastName": "Doe",
-  "email": "john.doe@example.com",
-  "phoneNo": "9876543210",
+  "employeeId": 15,
+  "employeeCode": 79,
+  "firstName": "Neerad",
+  "lastName": "Ramesh",
+  "email": "neeradsramesh@gmail.com",
+  "phoneNo": "9571994484",
   "department": "Engineering",
   "designation": "Backend Engineer",
-  "salary": 950000,
-  "joiningDate": "2024-01-15",
+  "salary": 100000,
+  "joiningDate": "2005-07-18",
   "status": "Active"
 }
 ```
+
+#### Postman Verification:
+![Postman GET Employee by ID](docs/screenshots/get_employee_by_id.svg)
 
 ---
 
@@ -404,16 +426,16 @@ curl -X GET "http://localhost:8080/api/employee/search?keyword=Engineering"
 ```json
 [
   {
-    "employeeId": 1,
-    "employeeCode": 1001,
-    "firstName": "John",
-    "lastName": "Doe",
-    "email": "john.doe@example.com",
-    "phoneNo": "9876543210",
+    "employeeId": 15,
+    "employeeCode": 79,
+    "firstName": "Neerad",
+    "lastName": "Ramesh",
+    "email": "neeradsramesh@gmail.com",
+    "phoneNo": "9571994484",
     "department": "Engineering",
     "designation": "Backend Engineer",
-    "salary": 950000,
-    "joiningDate": "2024-01-15",
+    "salary": 100000,
+    "joiningDate": "2005-07-18",
     "status": "Active"
   }
 ]
@@ -423,59 +445,65 @@ curl -X GET "http://localhost:8080/api/employee/search?keyword=Engineering"
 
 ### 5. Update an Employee (PUT)
 
-**Endpoint:** `PUT /api/employee/1`  
+**Endpoint:** `PUT /api/employee/16`  
 **Content-Type:** `application/json`
 
 **Sample Request (cURL):**
 ```bash
-curl -X PUT http://localhost:8080/api/employee/1 \
+curl -X PUT http://localhost:8080/api/employee/16 \
   -H "Content-Type: application/json" \
   -d '{
-    "employeeCode": 1001,
-    "firstName": "John",
-    "lastName": "Doe",
-    "email": "john.doe@example.com",
-    "phoneNo": "9876543210",
+    "employeeCode": 7,
+    "firstname": "daksh",
+    "lastName": "Sharma",
+    "email": "daksh@gmail.com",
+    "phoneNo": "9571556681",
     "department": "Engineering",
-    "designation": "Lead Backend Engineer",
-    "salary": 1200000,
-    "joiningDate": "2024-01-15",
-    "status": "Active"
+    "designation": "Machine Learning",
+    "salary": 75000,
+    "joiningDate": "2022-04-01T10:00:00.000Z",
+    "status_": "Active"
   }'
 ```
 
 **Success Response (`200 OK`):**
 ```json
 {
-  "employeeId": 1,
-  "employeeCode": 1001,
-  "firstName": "John",
-  "lastName": "Doe",
-  "email": "john.doe@example.com",
-  "phoneNo": "9876543210",
+  "employeeId": 16,
+  "employeeCode": 7,
+  "firstName": "daksh",
+  "lastName": "Sharma",
+  "email": "daksh@gmail.com",
+  "phoneNo": "9571556681",
   "department": "Engineering",
-  "designation": "Lead Backend Engineer",
-  "salary": 1200000,
-  "joiningDate": "2024-01-15",
+  "designation": "Machine Learning",
+  "salary": 75000,
+  "joiningDate": "2022-04-01",
   "status": "Active"
 }
 ```
+
+#### Postman Verification:
+![Postman PUT Employee](docs/screenshots/put_update_employee.svg)
 
 ---
 
 ### 6. Delete an Employee (DELETE)
 
-**Endpoint:** `DELETE /api/employee/1`
+**Endpoint:** `DELETE /api/employee/17`
 
 **Sample Request (cURL):**
 ```bash
-curl -X DELETE http://localhost:8080/api/employee/1
+curl -X DELETE http://localhost:8080/api/employee/17
 ```
 
 **Success Response (`200 OK`):**
 ```text
-Employee with id 1 deleted successfully
+Employee with id 17 deleted successfully
 ```
+
+#### Postman Verification:
+![Postman DELETE Employee](docs/screenshots/delete_employee.svg)
 
 ---
 
