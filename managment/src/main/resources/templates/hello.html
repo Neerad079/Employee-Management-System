@@ -1,11 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Employee Managment</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Management System</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
-<h1 th:text="${message}">Welcome</h1>
-<p>Thymeleaf page is Working !</p>
+
+<div class="container" style="max-width: 600px; text-align: center; margin-top: 60px;">
+    <h1 style="font-size: 1.75rem; margin-bottom: 12px; color: #0f172a;" th:text="${message}">Welcome</h1>
+    <p style="color: #64748b; margin-bottom: 24px;">Thymeleaf template rendering is working successfully.</p>
+    <div>
+        <a class="btn btn-primary" th:href="@{/ui/employees}">Open Employee Dashboard</a>
+    </div>
+</div>
+
 </body>
 </html>

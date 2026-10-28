@@ -1,68 +1,80 @@
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Employee Details</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
 
-<h1>Employee Details</h1>
+<div class="container" style="max-width: 700px;">
+    <div class="header">
+        <div class="title-group">
+            <h1>Employee Details</h1>
+            <p>Profile information and records</p>
+        </div>
+        <a class="btn btn-secondary btn-sm" th:href="@{/ui/employees}">Back to Directory</a>
+    </div>
 
-<table border="1">
-    <tr>
-        <th>Employee ID</th>
-        <td th:text="${employee.employeeId}"></td>
-    </tr>
-    <tr>
-        <th>Employee Code</th>
-        <td th:text="${employee.employeeCode}"></td>
-    </tr>
-    <tr>
-        <th>First Name</th>
-        <td th:text="${employee.firstName}"></td>
-    </tr>
-    <tr>
-        <th>Last Name</th>
-        <td th:text="${employee.lastName}"></td>
-    </tr>
-    <tr>
-        <th>Email</th>
-        <td th:text="${employee.email}"></td>
-    </tr>
-    <tr>
-        <th>Phone Number</th>
-        <td th:text="${employee.phoneNo}"></td>
-    </tr>
-    <tr>
-        <th>Department</th>
-        <td th:text="${employee.department}"></td>
-    </tr>
-    <tr>
-        <th>Designation</th>
-        <td th:text="${employee.designation}"></td>
-    </tr>
-    <tr>
-        <th>Salary</th>
-        <td th:text="${employee.salary}"></td>
-    </tr>
-    <tr>
-        <th>Joining Date</th>
-        <td th:text="${employee.joiningDate}"></td>
-    </tr>
-    <tr>
-        <th>Status</th>
-        <td th:text="${employee.status}"></td>
-    </tr>
-</table>
+    <table class="detail-table">
+        <tr>
+            <th>Employee ID</th>
+            <td th:text="${employee.employeeId}"></td>
+        </tr>
+        <tr>
+            <th>Employee Code</th>
+            <td th:text="${employee.employeeCode}"></td>
+        </tr>
+        <tr>
+            <th>First Name</th>
+            <td th:text="${employee.firstName}"></td>
+        </tr>
+        <tr>
+            <th>Last Name</th>
+            <td th:text="${employee.lastName}"></td>
+        </tr>
+        <tr>
+            <th>Email</th>
+            <td th:text="${employee.email}"></td>
+        </tr>
+        <tr>
+            <th>Phone Number</th>
+            <td th:text="${employee.phoneNo}"></td>
+        </tr>
+        <tr>
+            <th>Department</th>
+            <td th:text="${employee.department}"></td>
+        </tr>
+        <tr>
+            <th>Designation</th>
+            <td th:text="${employee.designation}"></td>
+        </tr>
+        <tr>
+            <th>Salary</th>
+            <td th:text="${employee.salary}"></td>
+        </tr>
+        <tr>
+            <th>Joining Date</th>
+            <td th:text="${employee.joiningDate}"></td>
+        </tr>
+        <tr>
+            <th>Status</th>
+            <td>
+                <span th:text="${employee.status}"
+                      th:class="${employee.status == 'Active' ? 'badge badge-active' : 'badge badge-inactive'}">
+                </span>
+            </td>
+        </tr>
+    </table>
 
-<p>
-    <a th:href="@{/ui/employees}">Back to Employee List</a>
-</p>
-
-<a th:href="@{/ui/employees/{id}/edit(id=${employee.employeeId})}">
-    Edit Employee
-</a>
+    <div class="form-actions">
+        <a class="btn btn-primary" th:href="@{/ui/employees/{id}/edit(id=${employee.employeeId})}">
+            Edit Employee
+        </a>
+        <a class="btn btn-secondary" th:href="@{/ui/employees}">Back to Employee List</a>
+    </div>
+</div>
 
 </body>
 </html>
